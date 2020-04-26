@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 IMG_NAME=cs354/student-env
 
-if [[ $EUID != 0 ]]
-then
-  echo "This script must be run as root"
-  exit
-fi
 
 ID=local
 if [ $(hostname) = vicious ]
 then
   ID=$(whoami)
+  if [[ $EUID != 0 ]]
+  then
+    echo "This script must be run as root"
+    exit
+  fi
 fi
 
 
