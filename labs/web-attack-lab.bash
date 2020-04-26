@@ -2,7 +2,7 @@
 
 ## student-env container name is : attacker-id
 ## lab container name is web-attack-lab-id
-## network name is web-attack-lab-id
+## network name is cs354-id
 ##  id is either 'local' or their vicious username
 
 web_server_port=5000
@@ -14,13 +14,13 @@ then
 fi
 
 start_attacker() {
-  network_created=$(docker network ls | grep "web-attack-lab-${id}" | wc -l)
+  network_created=$(docker network ls | grep "cs354-${id}" | wc -l)
   if [ $network_created -gt 0 ]
   then
     echo "Network already exists"
   else
-    echo Creating network web-attack-lab-${id}
-    docker network create web-attack-lab-${id}
+    echo Creating network cs354-${id}
+    docker network create cs354-${id}
     echo Created network
   fi
 
@@ -53,7 +53,7 @@ start_attacker() {
     docker exec -it /bin/bash attacker-${id}
   else
     echo "Starting new attacker container"
-    docker run -it --rm --name attacker-${id} -p ${student_env_port}:5555 --network web-attack-lab-${id} cs354/student-env:latest
+    docker run -it --rm --name attacker-${id} -p ${student_env_port}:6000 --network cs354-${id} cs354/student-env:latest
   fi
 }
 
@@ -68,7 +68,7 @@ fi
 if [ $id = local ]
 then
   echo "LOCAL"
-  docker run --rm -d --name web-attack-lab-${id} -p 5000:5000 -p 5555:5555 --network web-attack-lab-${id} cs354/web-attack-lab:latest
+  docker run --rm -d --name web-attack-lab-${id} -p 5000:5000 -p 5555:5555 --network cs354-${id} cs354/web-attack-lab:latest
 else
   read_port=0
   while (( read_port < 1000 || read_port >  65535))
@@ -79,7 +79,7 @@ else
     read_port=${REPLY}
   done
   web_server_port=$read_port
-  docker run --rm -d --name web-attack-lab-${id} -p ${web_server_port}:5000 --network web-attack-lab-${id} cs354/web-attack-lab:latest
+  docker run --rm -d --name web-attack-lab-${id} -p ${web_server_port}:5000 --network cs354-${id} cs354/web-attack-lab:latest
 
   read_port=0
   while (( read_port < 1000 || read_port >  65535))
