@@ -2,10 +2,12 @@
 
 This repo contains the scripts to start many of the projects and labs.
 
-### You will need:
+## Linux
+You make our life easy. Just install Docker.
+[Docker for linux](https://docs.docker.com/engine/install/)
 
-1. Windows users need the [linux subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-2. Everyone needs Docker [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+## MacOS
+Again just install Docker.
+[Docker for macOS]([https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 
-Many labs/projects will be conducted in docker containers so that each student has identical separate setups. This prevents one person from interfering with another, and version inconsistencies.
-
+## Windows
