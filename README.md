@@ -7,7 +7,6 @@ You make our life easy. Just install Docker.
 [Docker for linux](https://docs.docker.com/engine/install/)
 
 ## MacOS
-Again just install Docker.
-[Docker for macOS]([https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+Install [Docker for macOS]([https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 
 ## Windows
