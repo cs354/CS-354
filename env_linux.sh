@@ -7,6 +7,13 @@ then
   exit
 fi
 
+ID=local
+if [ $(hostname) = vicious ]
+then
+  ID=$(whoami)
+fi
+
+
 if [[ $(docker ps -qf ancestor\=$IMG_NAME)  ]]
 then
   echo "The environment is already running. If you can't exit it normally, run:"
@@ -15,6 +22,7 @@ then
   exit
 fi
 
+docker network create cs354-${ID} > /dev/null 2>&1
 if ! docker start -i `docker ps -qaf ancestor=$IMG_NAME` 2> /dev/null; then
-  docker run -it --network host $IMG_NAME
+  docker run -it --network cs354-$ID --name cs354-$ID $IMG_NAME
 fi
