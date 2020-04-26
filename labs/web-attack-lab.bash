@@ -17,11 +17,9 @@ start_attacker() {
   network_created=$(docker network ls | grep "cs354-${id}" | wc -l)
   if [ $network_created -gt 0 ]
   then
-    echo "Network already exists"
+    echo "Network already exists, skipping"
   else
-    echo Creating network cs354-${id}
-    docker network create cs354-${id}
-    echo Created network
+    docker network create cs354-${id} > /dev/null
   fi
 
   running=$(docker ps | grep "attacker-${id}" | wc -l)
@@ -32,8 +30,9 @@ start_attacker() {
   echo " "
   if [ $id != local ]
   then
-    echo "   To make the server available on your local machine (not on vicious) run :"
-    echo "   ssh -L 5000:localhost:${web_server_port} ${id}@vicious.cs.northwestern.edu"
+    echo "   To make the lab server available on your local machine, run this command"
+    echo "   on your LOCAL machine (not in this shell):"
+    echo "   --> ssh -L 5000:localhost:${web_server_port} ${id}@vicious.cs.northwestern.edu"
   fi
   echo " "
   echo "   After this script finishes you will be dropped into the student container "
@@ -68,7 +67,7 @@ fi
 if [ $id = local ]
 then
   echo "LOCAL"
-  docker run --rm -d --name web-attack-lab-${id} -p 5000:5000 -p 5555:5555 --network cs354-${id} cs354/web-attack-lab:latest
+  docker run --rm -d --name web-attack-lab-${id} -p 5000:5000 -p 5555:5555 --network cs354-${id} cs354/web-attack-lab:latest > /dev/null
 else
   read_port=0
   while (( read_port < 1000 || read_port >  65535))
@@ -77,7 +76,7 @@ else
     echo "This will be forwarded to localhost:5000"
     read;
     read_port=${REPLY}
-    if lsof -i:${REPLY} -P -n | grep LISTEN
+    if ! [ -z "$(lsof -i:${REPLY} -P -n | grep LISTEN)" ]
     then
       echo " "
       echo "!! That port is in use, pick another !!"
@@ -86,6 +85,7 @@ else
     fi
   done
   web_server_port=$read_port
+
   docker run --rm -d --name web-attack-lab-${id} -p ${web_server_port}:5000 --network cs354-${id} cs354/web-attack-lab:latest
 
   read_port=0
@@ -97,7 +97,7 @@ else
     echo "from your browser to allow XSS attacks."
     read;
     read_port=${REPLY}
-    if lsof -i:${REPLY} -P -n | grep LISTEN
+    if ! [ -z "$(lsof -i:${REPLY} -P -n | grep LISTEN)" ]
     then
       echo " "
       echo "!! That port is in use, pick another !!"
@@ -106,7 +106,6 @@ else
     fi
   done
   student_env_port=$read_port
-
 fi
 
 start_attacker
