@@ -77,6 +77,13 @@ else
     echo "This will be forwarded to localhost:5000"
     read;
     read_port=${REPLY}
+    if lsof -i:${REPLY} -P -n | grep LISTEN
+    then
+      echo " "
+      echo "!! That port is in use, pick another !!"
+      echo " "
+      read_port=0
+    fi
   done
   web_server_port=$read_port
   docker run --rm -d --name web-attack-lab-${id} -p ${web_server_port}:5000 --network cs354-${id} cs354/web-attack-lab:latest
@@ -84,11 +91,19 @@ else
   read_port=0
   while (( read_port < 1000 || read_port >  65535))
   do
+    echo " "
     echo "Enter a second port # to use (1000 -> 65535) REMEMBER THIS NUMBER"
     echo "This port will allow you to reach your attack container on vicious"
     echo "from your browser to allow XSS attacks."
     read;
     read_port=${REPLY}
+    if lsof -i:${REPLY} -P -n | grep LISTEN
+    then
+      echo " "
+      echo "!! That port is in use, pick another !!"
+      echo " "
+      read_port=0
+    fi
   done
   student_env_port=$read_port
 
