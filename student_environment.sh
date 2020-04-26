@@ -3,7 +3,7 @@ IMG_NAME=cs354/student-env
 
 
 ID=local
-if [ $(hostname) = vicious ]
+if [ $(hostname) != vicious ]
 then
   ID=$(whoami)
   if [[ $EUID != 0 ]]
