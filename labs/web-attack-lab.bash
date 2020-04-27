@@ -93,5 +93,5 @@ echo " "
 echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 
 path=$(realpath $0)
-stu_env="${path%labs/web-attack-lab.sh}"student_environment.sh
+stu_env="${path%labs/web-attack-lab.sh}"student_environment.bash
 sh $stu_env

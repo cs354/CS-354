@@ -16,7 +16,7 @@ fi
 CTR_NAME=cs354-$ID
 NETWORK_NAME=cs354-$ID
 
-if [[ $(docker ps -qf name=$CTR_NAME)  ]]
+if [[ $(docker ps -qf name=$CTR_NAME) ]]
 then
   echo "The environment is already running. If you can't exit it normally, run:"
   echo "docker stop " `docker ps -qf name=$CTR_NAME`
