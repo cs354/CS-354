@@ -9,6 +9,11 @@ then
   id=$(whoami)
 fi
 
+NETWORK_NAME=cs354-$id
+
+# Make sure network is up before we create the web-attack-lab forum container
+docker network create $NETWORK_NAME > /dev/null 2>&1
+
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
