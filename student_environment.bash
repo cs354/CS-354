@@ -3,9 +3,10 @@ IMG_NAME=cs354/student-env
 
 
 ID=local
-if [ $(hostname) != vicious ]
+if [ $(hostname) == vicious ]
 then
   ID=$(whoami)
+else
   if [[ $EUID != 0 ]]
   then
     echo "This script must be run as root"
