@@ -66,6 +66,6 @@ fi
 
 path=$(realpath $0)
 stu_env="${path%labs/nmap.bash}"student_environment.bash
-/bin/bash $stu_env
+bash $stu_env
 
 
