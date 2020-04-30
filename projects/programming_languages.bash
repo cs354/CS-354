@@ -22,13 +22,13 @@ IMG_SQL_NAME=cs354/mysqld:latest
 
 
 start_mysql() {
-  if ! docker start --rm --network $NETWORK_NAME -d `docker ps -qaf name=$CTR_SQL_NAME` 2> /dev/null; then
+  if ! docker start `docker ps -qaf name=$CTR_SQL_NAME` 2> /dev/null; then
     docker run --rm -d --network $NETWORK_NAME --name $CTR_SQL_NAME $IMG_SQL_NAME
   fi
 }
 
 start_proglan() {
-  if ! docker start -e MYSQLD_HOST="${CTR_SQL_NAME}"  --network $NETWORK_NAME -i `docker ps -qaf name=$CTR_PL_NAME` 2> /dev/null; then
+  if ! docker start -i `docker ps -qaf name=$CTR_PL_NAME` 2> /dev/null; then
     docker run  -e MYSQLD_HOST="${CTR_SQL_NAME}" -it --network $NETWORK_NAME --name $CTR_PL_NAME $IMG_PL_NAME
   fi
 }
@@ -38,7 +38,7 @@ stop_mysql() {
   lab_running=$(docker ps | grep "${CTR_PL_NAME}" | wc -l)
   if [ $lab_running -gt 0 ]
   then
-    docker stop $CTR_PL_NAME
+    docker stop $CTR_SQL_NAME
   fi
 }
 
@@ -55,7 +55,7 @@ stop_proglang() {
 readme() {
   echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
   echo "   "
-  echo "   Programming Languages Lab"
+  echo "   Programming Languages Project"
   echo "   "
   echo "   You are being dropped into the programming languages project."
   echo "   We use a slightly different container for this project since it"
@@ -66,9 +66,6 @@ readme() {
   echo "   reach it at hostname:"
   echo "   -> ${CTR_SQL_NAME}"
   echo "   with command 'mysql --host ${CTR_SQL_NAME}'"
-  echo " "
-  echo "   It may take >1 minute for the mysql container to startup"
-  echo "   the first time."
   echo "  "
   echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 }
