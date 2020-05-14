@@ -46,7 +46,7 @@ stop_proglang() {
   lab_running=$(docker ps | grep "${CTR_PL_NAME}" | wc -l)
   if [ $lab_running -gt 0 ]
   then
-    docker stop $CTR_PL_NAME
+    docker stop ${CTR_PL_NAME}
   fi
 }
 
@@ -83,8 +83,8 @@ then
   response=${REPLY}
   if [ ${response} = stop ]
   then
-    docker stop ${CTR_NAME}
-    echo "Stopping victim container..."
+    stop_proglang
+    echo "Stopping proglang container"
     exit
   elif [ ${response} = resume ]
   then

@@ -57,5 +57,10 @@ readme
 
 docker network create $NETWORK_NAME > /dev/null 2>&1
 if ! docker start -i `docker ps -qaf name=$CTR_NAME` 2> /dev/null; then
-  docker run -it --network $NETWORK_NAME --name $CTR_NAME $IMG_NAME
+  if [[ "$OSTYPE" == "darwin"* ]]
+  then
+    docker run -it --privileged --network $NETWORK_NAME --name $CTR_NAME $IMG_NAME
+  else
+    docker run -it --network $NETWORK_NAME --name $CTR_NAME $IMG_NAME
+  fi
 fi
