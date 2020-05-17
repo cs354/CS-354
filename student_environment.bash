@@ -48,19 +48,20 @@ then
     docker exec -it `docker ps -qf name=$CTR_NAME` /bin/bash
     exit
   else
-    echo "You must type stop or new... Exitting."
+    echo "You must type stop or new... Exiting."
     exit
   fi
 fi
 
-readme
+DOCKER_ARGS="-it --network $NETWORK_NAME --name $CTR_NAME -v${PWD}/mnt:/mnt"
 
 docker network create $NETWORK_NAME > /dev/null 2>&1
 if ! docker start -i `docker ps -qaf name=$CTR_NAME` 2> /dev/null; then
   if [[ "$OSTYPE" == "darwin"* ]]
   then
-    docker run -it --privileged --network $NETWORK_NAME --name $CTR_NAME $IMG_NAME
+    DOCKER_ARGS+=" --privileged"
+    docker run $DOCKER_ARGS $IMG_NAME
   else
-    docker run -it --network $NETWORK_NAME --name $CTR_NAME $IMG_NAME
+    docker run $DOCKER_ARGS $IMG_NAME
   fi
 fi
