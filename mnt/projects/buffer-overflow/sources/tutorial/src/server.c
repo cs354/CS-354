@@ -1,4 +1,4 @@
-#include "server_thread.h"
+#include "server.h"
 #include <poll.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,14 +12,14 @@
 #define BUF_SZ 0x1000
 
 
-void easy1(int cfd, char* buf);
+void tutorial(int cfd, char* buf);
 
 void* run(int cfd) {
   printf("Starting session %d\n", cfd);
   char buf[BUF_SZ];
   int r = read(cfd, buf, BUF_SZ);
   if (r > 0) {
-    easy1(cfd, buf);
+    tutorial(cfd, buf);
     bzero(buf, BUF_SZ);
   }
   printf("Ending session %d\n", cfd);
@@ -27,7 +27,7 @@ void* run(int cfd) {
   return NULL;
 }
 
-void easy1(int cfd, char* buf) {
+void tutorial(int cfd, char* buf) {
     char local_buf[512];
     printf("%p\n", local_buf);
     strcpy(local_buf, buf);
