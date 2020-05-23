@@ -1,0 +1,3 @@
+file medium
+b medium 
+set follow-fork-mode child
