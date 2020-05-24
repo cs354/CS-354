@@ -41,7 +41,7 @@ void hard(int cfd) {
         read(cfd, &buf[++a], 1);
     }
     srand(our_time);
-    read(cfd, &buf[0], b-a);
+    printf("Read %ld bytes\n",read(cfd, &buf[0], b-a));
     if ((rand() & 0xFFFFF) == 1337) {
         return; // what are the odds!
     }
