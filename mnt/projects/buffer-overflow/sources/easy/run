@@ -1,0 +1,3 @@
+file easy
+b easy
+set follow-fork-mode child
