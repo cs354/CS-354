@@ -1,4 +1,4 @@
-#include "server_thread.h"
+#include "server.h"
 #include <poll.h>
 #include <stdio.h>
 #include <stdlib.h>

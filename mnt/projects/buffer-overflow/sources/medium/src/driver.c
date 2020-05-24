@@ -1,4 +1,4 @@
-#include "server_thread.h"
+#include "server.h"
 #include "config.h"
 #include <netinet/in.h>
 #include <netinet/ip.h>

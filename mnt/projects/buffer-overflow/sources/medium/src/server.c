@@ -1,4 +1,4 @@
-#include "server_thread.h"
+#include "server.h"
 #include <poll.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +23,6 @@ void medium(int cfd) {
 
     char cnry[] = "cnry!~!";
     char buf[32];
-    printf("buf : %p\n",&buf);
     int r = read(cfd, buf, 320);
     if (strcmp(cnry,"cnry!~!")) {
         dprintf(cfd,"-=-=-= Stack smashing detected =-=-=- \n This incident will be reported\n");
