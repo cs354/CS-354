@@ -13,18 +13,22 @@ void easy(int cfd);
 
 void *run(int cfd) {
     printf("Starting session %d\n", cfd);
-    easy(cfd);
+    medium(cfd);
     printf("Ending session %d\n", cfd);
     shutdown(cfd, SHUT_RDWR);
     return NULL;
 }
 
 void easy(int cfd) {
-    char fight_song[256] = "Spread far the fame of our fair ";
-    char recv[256];
-    dprintf(cfd,"Finish this line: \n Spread far the fame of our fair \n");
-    read(cfd, recv, 511);
-    strcat(fight_song,recv);
-    dprintf(cfd, fight_song);
-}
 
+    char cnry[] = "cnry!~!";
+    char buf[32];
+    int r = read(cfd, buf, 320);
+    if (strcmp(cnry,"cnry!~!")) {
+        dprintf(cfd,"-=-=-= Stack smashing detected =-=-=- \n This incident will be reported\n");
+        exit(1);
+    }
+    if (r < 1)
+        exit(1);
+    printf("Returning;");
+}

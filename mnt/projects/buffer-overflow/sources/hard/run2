@@ -1,3 +1,2 @@
-file medium
-b medium
+file hard
 set follow-fork-mode child
