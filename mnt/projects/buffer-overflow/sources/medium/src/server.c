@@ -13,7 +13,7 @@ void medium(int cfd);
 
 void *run(int cfd) {
     printf("Starting session %d\n", cfd);
-    easy(cfd);
+    medium(cfd);
     printf("Ending session %d\n", cfd);
     shutdown(cfd, SHUT_RDWR);
     return NULL;

