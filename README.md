@@ -18,10 +18,10 @@ You make our life easy. Just install Docker. We suggest you use your distributio
 `sudo apt install docker.io`
 
 ### Arch
-`pacman -S docker`
+`sudo pacman -S docker`
 
 ### RHEL/Fedora
 You can install docker manually using the link above, or you can try Red Hat's container implementation called podman. Docker is not available in the normal package repos.  
-`dnf install podman`
+`sudo dnf install podman`
 
 
