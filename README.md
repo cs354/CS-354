@@ -15,7 +15,7 @@ You make our life easy. Just install Docker. We suggest you use your distributio
 [Docker for linux](https://docs.docker.com/engine/install/)
 
 ### Ubuntu/Debian
-`apt install docker`
+`sudo apt install docker.io`
 
 ### Arch
 `pacman -S docker`
