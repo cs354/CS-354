@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 IMG_NAME=cs354/student-env:latest
 
+CS354_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 readme() {
   echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
   echo "   "
@@ -53,7 +55,7 @@ then
   fi
 fi
 
-DOCKER_ARGS="-it --network $NETWORK_NAME --name $CTR_NAME -v ${PWD}/mnt:/mnt"
+DOCKER_ARGS="-it --network $NETWORK_NAME --name $CTR_NAME -v ${CS354_DIR}/mnt:/mnt"
 
 docker network create $NETWORK_NAME > /dev/null 2>&1
 if ! docker start -i `docker ps -qaf name=$CTR_NAME` 2> /dev/null; then
