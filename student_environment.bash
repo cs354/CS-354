@@ -53,7 +53,7 @@ then
   fi
 fi
 
-DOCKER_ARGS="-it --network $NETWORK_NAME --name $CTR_NAME -v${PWD}/mnt:/mnt"
+DOCKER_ARGS="-it --network $NETWORK_NAME --name $CTR_NAME -v ${PWD}/mnt:/mnt"
 
 docker network create $NETWORK_NAME > /dev/null 2>&1
 if ! docker start -i `docker ps -qaf name=$CTR_NAME` 2> /dev/null; then

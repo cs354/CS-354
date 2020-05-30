@@ -30,6 +30,6 @@ void* run(int cfd) {
 void tutorial(int cfd, char* buf) {
     char local_buf[512];
     printf("%p\n", local_buf);
-    strcpy(local_buf, buf);
     dprintf (cfd, "This is what you sent me:\n%s\n", buf );
+    strcpy(local_buf, buf);
 }
