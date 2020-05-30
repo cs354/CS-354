@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tar cfz submission.tgz name.h
+./util/submit.py 2 submission.tgz
+rm -f submission.tgz
