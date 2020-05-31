@@ -1,5 +1,5 @@
 #!/bin/bash
 
 tar cfz submission.tgz exploits/
-./util/submit.py 2 submission.tgz
+./util/submit.py 3 submission.tgz
 rm -f submission.tgz

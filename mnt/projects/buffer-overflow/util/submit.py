@@ -26,6 +26,7 @@ def submit(project, file):
     
   started = False
   count = -1
+  print("Please be patient while the server scores this submission. The buffer overflow project takes some time to grade!")
   while True:
     response = session.get('http://%s/projects/status/%i/' % (SITE, submission))
     status = int(response.text)
