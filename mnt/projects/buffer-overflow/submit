@@ -1,5 +1,20 @@
 #!/bin/bash
 
-tar cfz submission.tgz exploits/
+if [ -z "$1" ]; then
+	echo "Usage: $0 {exploit_name|all}"
+	exit
+fi
+
+if [[ $1 == "all" ]]; then
+	tar cfz submission.tgz exploits/
+else
+	tar cfz submission.tgz exploits/$1.rb
+	rv=$?
+	if [ $rv -ne 0  ]; then
+		echo "Error: file exploits/$1.rb does not exist!"
+		exit
+	fi
+fi
+
 ./util/submit.py 3 submission.tgz
 rm -f submission.tgz
