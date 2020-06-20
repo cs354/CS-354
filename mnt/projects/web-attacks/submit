@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tar cfz submission.tgz flags.txt
+./util/submit.py 5 submission.tgz
+rm -f submission.tgz
