@@ -1,0 +1,7 @@
+part1 answer goes on line 1
+part2 answer goes on line 2
+part3 answer goes on line 3
+part4 answer goes on line 4
+
+Extra lines are ignored.
+

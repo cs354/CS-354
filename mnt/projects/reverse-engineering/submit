@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tar cfz submission.tgz answers.txt
+./util/submit.py 8 submission.tgz
+rm -f submission.tgz
