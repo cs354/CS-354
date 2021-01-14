@@ -16,7 +16,7 @@ else
   id=$(whoami)
 fi
 
-NETWORK_NAME=bridge
+NETWORK_NAME=cs354
 
 # Make sure network is up before we create the web-attack-lab forum container
 docker network create $NETWORK_NAME > /dev/null 2>&1

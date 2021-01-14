@@ -12,7 +12,7 @@ else
   id=$(whoami)
 fi
 
-NETWORK_NAME=bridge #cs354-$id
+NETWORK_NAME=cs354 #cs354-$id
 CTR_NAME=ncat-${id}
 IMG_NAME=cs354/student-env:latest
 

@@ -29,7 +29,7 @@ else
 fi
 
 CTR_NAME=cs354-$ID
-NETWORK_NAME=bridge
+NETWORK_NAME=cs354
 
 if [[ $(docker ps -qf name=$CTR_NAME) ]]
 then
