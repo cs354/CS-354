@@ -14,7 +14,7 @@ fi
 
 
 
-NETWORK_NAME=cs354-$id
+NETWORK_NAME=bridge #cs354-$id
 CTR_SQL_NAME=mysqld-${id}
 CTR_PL_NAME=proglang-${id}
 IMG_PL_NAME=cs354/proglang:latest

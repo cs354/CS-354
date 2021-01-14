@@ -16,7 +16,7 @@ else
   id=$(whoami)
 fi
 
-NETWORK_NAME=cs354-$id
+NETWORK_NAME=bridge
 
 # Make sure network is up before we create the web-attack-lab forum container
 docker network create $NETWORK_NAME > /dev/null 2>&1
@@ -36,7 +36,7 @@ fi
 if [ $id = local ]
 then
   echo "LOCAL"
-  docker run --rm -d --name web-attack-lab-${id} -p 5000:5000 -p 5555:5555 --network cs354-${id} cs354/web-attack-lab:latest > /dev/null
+  docker run --rm -d --name web-attack-lab-${id} -p 5000:5000 -p 5555:5555 --network $NETWORK_NAME cs354/web-attack-lab:latest > /dev/null
 else
   read_port=0
   while (( read_port < 1000 || read_port >  65535))
@@ -55,7 +55,7 @@ else
   done
   web_server_port=$read_port
 
-  docker run --rm -d --name web-attack-lab-${id} -p ${web_server_port}:5000 --network cs354-${id} cs354/web-attack-lab:latest
+  docker run --rm -d --name web-attack-lab-${id} -p ${web_server_port}:5000 --network $NETWORK_NAME cs354/web-attack-lab:latest
 
   read_port=0
   while (( read_port < 1000 || read_port >  65535))
