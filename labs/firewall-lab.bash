@@ -12,7 +12,7 @@ then
 fi
 
 start_attacker() {
-  #network_created=$(docker network ls | grep "firewall-lab-${id}" | wc -l)
+  network_created=$(docker network ls | grep "firewall-lab-${id}" | wc -l)
   #if [ $network_created -gt 0 ]
   #then
   #  echo "Network already exists"
@@ -22,7 +22,7 @@ start_attacker() {
   #  echo Created network
   #fi
 
-  docker run --rm --privileged -d --name firewall-lab-${id} --network bridge cs354/lab-firewall:latest
+  docker run --rm --privileged -d --name firewall-lab-${id} --network cs354 cs354/lab-firewall:latest
 
   running=$(docker ps | grep "firewall-attacker-${id}" | wc -l)
 
@@ -33,7 +33,7 @@ start_attacker() {
   echo "   We are starting a version of the general container."
   echo "   Changes you make here will not be saved!"
   echo " "
-  echo "   Inside this container the firewall system's hostname is: "
+  echo "   Inside this container, the firewall system's hostname is: "
   echo "   'firewall-lab-${id}'"
   echo " "
   echo "   You can connect to the firewall system by running"
