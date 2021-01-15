@@ -35,7 +35,7 @@ start_proglan() {
 
 
 stop_mysql() {
-  lab_running=$(docker ps | grep "${CTR_PL_NAME}" | wc -l)
+  lab_running=$(docker ps -a | grep "${CTR_PL_NAME}" | wc -l)
   if [ $lab_running -gt 0 ]
   then
     docker stop $CTR_SQL_NAME
@@ -43,7 +43,7 @@ stop_mysql() {
 }
 
 stop_proglang() {
-  lab_running=$(docker ps | grep "${CTR_PL_NAME}" | wc -l)
+  lab_running=$(docker ps -a | grep "${CTR_PL_NAME}" | wc -l)
   if [ $lab_running -gt 0 ]
   then
     docker stop ${CTR_PL_NAME}
@@ -75,7 +75,7 @@ realpath() {
 }
 
 docker network create $NETWORK_NAME > /dev/null 2>&1
-lab_running=$(docker ps | grep "${CTR_PL_NAME}" | wc -l)
+lab_running=$(docker ps -a | grep "${CTR_PL_NAME}" | wc -l)
 if [ $lab_running -gt 0 ]
 then
   echo Looks like the programming languages project is already running. Type 'stop' to stop it or 'resume' to resume.
