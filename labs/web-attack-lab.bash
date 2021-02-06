@@ -100,4 +100,4 @@ echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 
 path=$(realpath $0)
 stu_env="${path%labs/web-attack-lab.bash}"student_environment.bash
-sh $stu_env
+bash $stu_env
