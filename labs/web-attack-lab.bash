@@ -83,14 +83,14 @@ echo "   README"
 echo " "
 if [ $id != local ]
 then
-  echo "   To make the lab server available on your local machine, run this command"
-  echo "   on your LOCAL machine (not in this shell):"
-  echo "   --> ssh -L 5000:localhost:${web_server_port} ${id}@vicious.cs.northwestern.edu"
+  echo "   You can now connect to the web sever @"
+  echo "   http://vicious.cs.northwestern.edu:${web_server_port}"
 fi
 echo " "
 echo "   After this script finishes you will be dropped into the student container "
 echo "   you will need it later in the lab to attack the webserver. For now you can"
-echo "   minimize it."
+echo "   minimize it. The second port you entered is forwarded to port 6000 in this"
+echo "   container."
 echo " "
 echo "   The site is available to attack @ http://localhost:5000"
 echo " "
@@ -98,6 +98,8 @@ echo "   To exit: control+a+d"
 echo " "
 echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 
-path=$(realpath $0)
-stu_env="${path%labs/web-attack-lab.bash}"student_environment.bash
-bash $stu_env
+docker run -it --rm --name attacker-${id} -p ${student_env_port}:6000 --network ${NETWORK_NAME} cs354/student-env:latest
+
+#path=$(realpath $0)
+#stu_env="${path%labs/web-attack-lab.bash}"student_environment.bash
+#bash $stu_env
