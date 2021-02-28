@@ -42,7 +42,6 @@ else
   while (( read_port < 1000 || read_port >  65535))
   do
     echo "Enter the port number of vicious you want to use for the webserver (1000 -> 65535)"
-    echo "This will be forwarded to localhost:5000"
     read;
     read_port=${REPLY}
     if ! [ -z "$(lsof -i:${REPLY} -P -n | grep LISTEN)" ]
@@ -91,8 +90,6 @@ echo "   After this script finishes you will be dropped into the student contain
 echo "   you will need it later in the lab to attack the webserver. For now you can"
 echo "   minimize it. The second port you entered is forwarded to port 6000 in this"
 echo "   container."
-echo " "
-echo "   The site is available to attack @ http://localhost:5000"
 echo " "
 echo "   To exit: control+a+d"
 echo " "
