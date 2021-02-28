@@ -83,7 +83,7 @@ echo "   README"
 echo " "
 if [ $id != local ]
 then
-  echo "   You can now connect to the web sever @"
+  echo "   You can now connect to the web server @"
   echo "   http://vicious.cs.northwestern.edu:${web_server_port}"
 fi
 echo " "
