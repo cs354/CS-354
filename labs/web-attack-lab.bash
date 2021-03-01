@@ -45,7 +45,8 @@ else
     echo "This will be forwarded to localhost:5000"
     read;
     read_port=${REPLY}
-    if ! [ -z "$(lsof -i:${REPLY} -P -n | grep LISTEN)" ]
+    result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
+    if test -z "$result"
     then
       echo " "
       echo "!! That port is in use, pick another !!"
@@ -66,7 +67,8 @@ else
     echo "from your browser to allow XSS attacks."
     read;
     read_port=${REPLY}
-    if ! [ -z "$(lsof -i:${REPLY} -P -n | grep LISTEN)" ]
+    result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
+    if test -z "$result"
     then
       echo " "
       echo "!! That port is in use, pick another !!"
