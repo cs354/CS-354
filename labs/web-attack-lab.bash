@@ -45,7 +45,7 @@ else
     read;
     read_port=${REPLY}
     result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
-    if test -z "$result"
+    if ! test -z "$result"
     then
       echo " "
       echo "!! That port is in use, pick another !!"
@@ -67,7 +67,7 @@ else
     read;
     read_port=${REPLY}
     result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
-    if test -z "$result"
+    if ! test -z "$result"
     then
       echo " "
       echo "!! That port is in use, pick another !!"
