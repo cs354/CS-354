@@ -13,16 +13,16 @@ fi
 
 start_attacker() {
   network_created=$(docker network ls | grep "firewall-lab-${id}" | wc -l)
-  #if [ $network_created -gt 0 ]
-  #then
-  #  echo "Network already exists"
-  #else
-  #  echo Creating network firewall-lab-${id}
-  #  docker network create firewall-lab-${id}
-  #  echo Created network
-  #fi
+  if [ $network_created -gt 0 ]
+  then
+    echo "Network already exists"
+  else
+    echo Creating network firewall-lab-${id}
+    docker network create firewall-lab-${id}
+    echo Created network
+  fi
 
-  docker run --rm --privileged -d --name firewall-lab-${id} --network cs354 cs354/lab-firewall:latest
+  docker run --rm --privileged -d --name firewall-lab-${id} --network firewall-lab-${id} cs354/lab-firewall:latest
 
   running=$(docker ps | grep "firewall-attacker-${id}" | wc -l)
 
