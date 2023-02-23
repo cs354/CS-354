@@ -4,7 +4,7 @@
 ## lab container name is firewall-lab-id
 ## network name is firewall-lab-id
 ##  id is either 'local' or their vicious username
-
+docker pull cs354/lab-firewall:latest
 CS354_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 id=local
 if [ $(hostname) = vicious ]
