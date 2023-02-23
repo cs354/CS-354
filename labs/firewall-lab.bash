@@ -5,6 +5,7 @@
 ## network name is firewall-lab-id
 ##  id is either 'local' or their vicious username
 
+CS354_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 id=local
 if [ $(hostname) = vicious ]
 then
@@ -48,7 +49,7 @@ start_attacker() {
     docker exec -it /bin/bash firewall-attacker-${id}
   else
     echo "Starting new attacker container"
-    docker run -it --rm --name firewall-attacker-${id} --network firewall-lab-${id} cs354/student-env:latest
+    docker run -it --rm --name firewall-attacker-${id} --network firewall-lab-${id} -v ${CS354_DIR}/mnt:/mnt cs354/student-env:latest
   fi
 }
 
