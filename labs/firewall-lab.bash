@@ -4,7 +4,7 @@
 ## lab container name is firewall-lab-id
 ## network name is firewall-lab-id
 ##  id is either 'local' or their vicious username
-docker pull cs354/lab-firewall:latest
+docker pull ckotwasinski/lab-firewall:latest
 CS354_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 id=local
 if [ $(hostname) = vicious ]
@@ -23,7 +23,7 @@ start_attacker() {
     echo Created network
   fi
 
-  docker run --rm --privileged -d --name firewall-lab-${id} --network firewall-lab-${id} cs354/lab-firewall:latest
+  docker run --rm --privileged -d --name firewall-lab-${id} --network firewall-lab-${id} ckotwasinski/lab-firewall:latest
 
   running=$(docker ps | grep "firewall-attacker-${id}" | wc -l)
 
