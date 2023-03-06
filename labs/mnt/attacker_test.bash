@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "If you are running this lcoally enter local, otherwise if running on vicious enter your netid" id
+read -p "If you are running this lcoally enter local, otherwise if running on vicious enter your netid: " id
 points=0
 test1passed=false
 echo "Testing traffic redirection, connecting to port 80..."
