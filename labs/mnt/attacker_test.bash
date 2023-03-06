@@ -13,7 +13,7 @@ else
 fi
 
 points=0
-
+test1passed=false
 echo "Testing traffic redirection, connecting to port 80..."
 echo "If you successfully redirected traffic, you should end up contacting port 6666."
 output=$(nc firewall-lab-${id} 80)
@@ -21,6 +21,7 @@ if echo "$output" | grep -q "You have contacted the service listening on port 66
 then
 echo "Test 1: Passed"
 points=$((points+1))
+test1passed=true
 else
 echo "Test 1: Failed"
 fi
@@ -49,7 +50,8 @@ else
     echo "Machine IP address not in private IP address range, skipping test"
 fi
 
-
+if [ "$test1passed" = true ]
+then
 echo "Testing extra credit, connecting directly to port 6666..."
 nc -w 3 firewall-lab-${id} 6666
 if [ $? -ne 0 ]
@@ -58,6 +60,9 @@ echo "Test 3: Passed"
 points=$((points+1))
 else
 echo "Test 3: Failed"
+fi
+else
+echo "skipping test 3 since test 1 did not pass"
 fi
 
 echo "You earned $points point(s) out of 2."
