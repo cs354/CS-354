@@ -7,6 +7,9 @@
 docker pull ckotwasinski/lab-firewall:latest
 CS354_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 id=local
+student_env_port_80=80
+student_env_port_5555=5555
+student_env_port_6666=6666
 if [ $(hostname) = vicious ]
 then
   id=$(whoami)
@@ -23,7 +26,69 @@ start_attacker() {
     echo Created network
   fi
 
-  docker run --rm --privileged -d --name firewall-lab-${id} --network firewall-lab-${id} ckotwasinski/lab-firewall:latest
+  if [ $id = local ]
+  then
+    echo "LOCAL"
+  else
+    read_port=0
+    while (( read_port < 1000 || read_port >  65535))
+    do
+      echo " "
+      echo "Enter a port # to use (1000 -> 65535) REMEMBER THIS NUMBER"
+      echo "This port will allow you to reach your attack container on vicious"
+      echo "from your local machine through port 80 on vicious"
+      read;
+      read_port=${REPLY}
+      result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
+      if ! test -z "$result"
+      then
+        echo " "
+        echo "!! That port is in use, pick another !!"
+        echo " "
+        read_port=0
+      fi
+    done
+    student_env_port_80=$read_port
+    read_port=0
+    while (( read_port < 1000 || read_port >  65535))
+    do
+      echo " "
+      echo "Enter a port # to use (1000 -> 65535) REMEMBER THIS NUMBER"
+      echo "This port will allow you to reach your attack container on vicious"
+      echo "from your local machine through port 5555 on vicious"
+      read;
+      read_port=${REPLY}
+      result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
+      if ! test -z "$result"
+      then
+        echo " "
+        echo "!! That port is in use, pick another !!"
+        echo " "
+        read_port=0
+      fi
+    done
+    student_env_port_5555=$read_port
+    read_port=0
+    while (( read_port < 1000 || read_port >  65535))
+    do
+      echo " "
+      echo "Enter a port # to use (1000 -> 65535) REMEMBER THIS NUMBER"
+      echo "This port will allow you to reach your attack container on vicious"
+      echo "from your local machine through port 6666 on vicious"
+      read;
+      read_port=${REPLY}
+      result=$(netstat -tulpn |& grep ${REPLY} | grep "LISTEN")
+      if ! test -z "$result"
+      then
+        echo " "
+        echo "!! That port is in use, pick another !!"
+        echo " "
+        read_port=0
+      fi
+    done
+    student_env_port_6666=$read_port
+  fi
+  docker run --rm --privileged -d --name firewall-lab-${id} -p ${student_env_port_80}:80 -p ${student_env_port_5555}:5555 -p ${student_env_port_6666}:6666 --network firewall-lab-${id} ckotwasinski/lab-firewall:latest
 
   running=$(docker ps | grep "firewall-attacker-${id}" | wc -l)
 
