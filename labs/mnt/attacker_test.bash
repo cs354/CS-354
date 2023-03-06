@@ -16,8 +16,8 @@ points=0
 
 echo "Testing traffic redirection, connecting to port 80..."
 echo "If you successfully redirected traffic, you should end up contacting port 6666."
-nc firewall-lab-${id} 80
-if [ $? -eq 0 ]
+output=$(nc firewall-lab-${id} 80)
+if echo "$output" | grep -q "You have contacted the service listening on port 6666. Goodbye."
 then
 echo "Test 1: Passed"
 points=$((points+1))
@@ -38,6 +38,7 @@ then
     if [[ $? -eq 0 ]]; then
         # If inbound traffic is allowed on port 5555, print a success message
         echo "Inbound traffic allowed on port 5555"
+	echo "Test 2: Passed"
    	points=$((points+1)) 
 else
         # If inbound traffic is not allowed on port 5555, print a failure message
@@ -50,8 +51,8 @@ fi
 
 
 echo "Testing extra credit, connecting directly to port 6666..."
-nc firewall-lab-${id} 6666
-if [ $? -eq 0 ]
+nc -w 3 firewall-lab-${id} 6666
+if [ $? -ne 0 ]
 then
 echo "Test 3: Passed"
 points=$((points+1))
