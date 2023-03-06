@@ -27,9 +27,11 @@ fi
 
 # Get the IP address of the machine
 ip_address=$(hostname -I | awk '{print $1}')
-echo $ip_address
+echo "ip address is $ip_address"
 # Check if the IP address is in the private IP address range
-if [[ $ip_address == 10.* || $ip_address == 172.* || $ip_address == 192.168.* ]]; then
+IFS=. read -r i1 i2 i3 i4 <<< "$ip_address"
+if [[ ($i1 == 10) || ($i1 == 172 && $i2 -ge 16 && $i2 -le 31) || ($i1 == 192 && $i2 == 168) ]]
+then
     # If the IP address is in the private IP address range, test inbound traffic on port 5555
     echo "Testing inbound traffic on port 5555"
     nc firewall-lab-${id} 5555
