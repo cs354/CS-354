@@ -1,6 +1,6 @@
 #!/bin/bash
 
-id=vicious.northwestern.cs.edu
+id=vicious.cs.northwestern.edu
 
 if [ $(hostname) == vicious ]
 then
