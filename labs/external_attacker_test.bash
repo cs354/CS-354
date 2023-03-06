@@ -20,7 +20,7 @@ points=0
 test1passed=false
 echo "Testing traffic redirection, connecting to port 80..."
 echo "If you successfully redirected traffic, you should end up contacting port 6666."
-output=$(nc vicious.cs.northwestern.edu ${port_80})
+output=$(nc -w 3 vicious.cs.northwestern.edu ${port_80})
 if echo "$output" | grep -q "You have contacted the service listening on port 6666. Goodbye."
 then
 echo "Test 1: Passed"
