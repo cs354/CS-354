@@ -1,9 +1,15 @@
 #!/bin/bash
 
-id=local
-if [ $(hostname) = vicious ]
+if [ $(hostname) != vicious ]
 then
-id=$(whoami)
+  if [[ $EUID != 0 ]]
+  then
+    echo "This script must be run as root"
+    exit
+  fi
+  id=local
+else
+  id=$(whoami)
 fi
 
 points=0
