@@ -1,10 +1,9 @@
 #!/bin/bash
 
-id=northwestern.cs.edu
+id=vicious.northwestern.cs.edu
 
-if [ $(hostname) != vicious ]
+if [ $(hostname) -eq vicious ]
 then
-else
 read -p "What is the ip address of the host? " id
 fi
 # Prompt the user to enter the port number for forwarding to port 80
