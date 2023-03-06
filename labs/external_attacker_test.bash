@@ -2,7 +2,7 @@
 
 id=vicious.northwestern.cs.edu
 
-if [ $(hostname) -eq vicious ]
+if [ $(hostname) == vicious ]
 then
 read -p "What is the ip address of the host? " id
 fi
