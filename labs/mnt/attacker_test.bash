@@ -1,17 +1,5 @@
 #!/bin/bash
-
-if [ $(hostname) != vicious ]
-then
-  if [[ $EUID != 0 ]]
-  then
-    echo "This script must be run as root"
-    exit
-  fi
-  id=local
-else
-  id=$(whoami)
-fi
-
+read -p "If you are running this lcoally enter local, otherwise if running on vicious enter your netid" id
 points=0
 test1passed=false
 echo "Testing traffic redirection, connecting to port 80..."
