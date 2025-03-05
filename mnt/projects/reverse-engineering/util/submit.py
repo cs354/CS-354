@@ -45,6 +45,7 @@ def submit(project, file):
             count = 10
         count -= 1
         sys.stderr.write(".")
+        sys.stderr.flush()
         sleep(1)
 
     sys.stderr.write("\n")
