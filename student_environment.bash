@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-IMG_NAME=cs354/student-env:latest
+IMG_NAME=jasonlin1222/student-env:latest
 
 CS354_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -28,7 +28,7 @@ else
   fi
 fi
 
-CTR_NAME=cs354-$ID
+CTR_NAME=cs354v2-$ID
 NETWORK_NAME=cs354
 
 if [[ $(docker ps -qf name=$CTR_NAME) ]]
